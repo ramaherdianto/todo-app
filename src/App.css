@@ -13,7 +13,7 @@ body {
   align-items: center;
   justify-content: center;
   background: #f4f5f4;
-  padding: 0 20px;
+  padding: 2rem 20px;
 }
 
 .card-task {
@@ -142,7 +142,28 @@ form .input-box {
 }
 
 .del-done {
-  margin-left: 5vw;
+  margin-left: 3.7vw;
+}
+
+@media all and (max-width: 992px) {
+  .input-box button.button {
+    font-size: 1.8vw;
+    padding: 1.9vw 2.9vw;
+  }
+
+  form .input-box,
+  .content-task,
+  .completed {
+    margin-top: 5vw;
+  }
+
+  .button-action {
+    margin-left: 11vw;
+  }
+
+  .del-done {
+    margin-left: 8vw;
+  }
 }
 
 @media all and (max-width: 576px) {
@@ -154,14 +175,8 @@ form .input-box {
     border-radius: 1vw;
   }
 
-  form .input-box {
-    margin-top: 10vw;
-  }
-
-  .content-task {
-    margin-top: 10vw;
-  }
-
+  form .input-box,
+  .content-task,
   .completed {
     margin-top: 10vw;
   }
@@ -171,7 +186,7 @@ form .input-box {
   }
 
   .btn-delete {
-    margin-left: 2vw;
+    margin-left: 1.2vw;
   }
 
   .del-done {
