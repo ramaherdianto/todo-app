@@ -1,84 +1,180 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
-/* * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-} */
-
-body {
   font-family: "Poppins", sans-serif;
 }
 
-.jumbotron {
+body {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to bottom right, #0248df, #416fd2);
+  justify-content: center;
+  background: #f4f5f4;
+  padding: 0 20px;
+}
+
+.card-task {
+  max-width: 550px;
+  width: 100%;
+  background: #f4f5f4;
   padding: 30px;
+  border-radius: 4px;
+  /* box-shadow: 0 5px 20px -6px rgba(0, 0, 0, 0.15); */
+  box-shadow: 5px 5px 10px #babecc, -5px -5px 10px #f2f3f5;
+  -webkit-box-shadow: 5px 5px 10px #babecc, -5px -5px 10px #f2f3f5;
+  -moz-box-shadow: 5px 5px 10px #babecc, -5px -5px 10px #f2f3f5;
 }
 
-.jumbotron h1 {
-  color: #fff;
-}
-
-.jumbotron .form {
-  background-color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.jumbotron .form input {
-  border: none;
-  padding: 5px;
-  width: 350px;
-}
-
-.jumbotron .form .btn-submit {
-  border: none;
-  background-color: #ff9900;
-  padding: 10px 15px;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: 600;
-}
-
-.content {
+form .input-box {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  height: 55px;
   align-items: center;
+  position: relative;
+}
+
+form h1 {
+  text-align: center;
+  color: #2b2d42;
+}
+
+form .input-box {
+  margin-top: 4vw;
+}
+
+.input-box input {
+  height: 100%;
+  outline: none;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  background-color: transparent;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 0 45px;
+  transition: all 0.3s ease;
+}
+
+.input-box input.input {
+  width: 75%;
+  margin-right: 20px;
+}
+
+.input-box input.input:focus {
+  border-color: #4671ea;
+}
+
+.input-box button.button {
+  width: 30%;
+  padding: 1vw 1.2vw 1vw 1.1vw;
+  font-size: 1.2vw;
+  color: #fff;
+  background: #4671ea;
+  border: none;
+  border-radius: 0.3vw;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-box button.button:hover {
+  background: #1748cf;
+}
+
+.content-task {
+  margin-top: 4vw;
+}
+
+.completed {
+  margin-top: 4vw;
+}
+
+.content-task h3,
+.content-task p {
+  text-align: center;
+  color: #2b2d42;
+}
+
+.content-task p {
+  margin-top: 3vw;
 }
 
 .card {
-  width: 500px;
+  max-width: 420px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   border: 1px solid #cccccc;
-  padding: 20px;
+  padding: 15px;
   border-radius: 5px;
   margin-top: 15px;
 }
 
-.text {
+.action input {
+  display: block;
+  position: relative;
+  padding: 2vw;
+}
+
+.task {
   flex: 3;
+  margin-left: 1vw;
 }
 
 .button-action {
-  flex: 1;
+  flex: 2;
+  margin-left: 4.5vw;
 }
 
 .btn-edit,
 .btn-delete {
   border: none;
-  background-color: #ff9900;
-  padding: 5px;
+  background-color: #ffd640;
+  padding: 5px 8px;
   border-radius: 5px;
   color: #fff;
   margin: 2px;
 }
 
 .btn-delete {
-  background-color: #bf2828;
+  background-color: #e44b3b;
+  margin-left: 0.5vw;
+}
+
+.del-done {
+  margin-left: 5vw;
+}
+
+@media all and (max-width: 576px) {
+  .input-box button.button {
+    width: 30%;
+    padding: 1.3vw 3vw 1.3vw 3vw;
+    font-size: 3.3vw;
+    color: #fff;
+    border-radius: 1vw;
+  }
+
+  form .input-box {
+    margin-top: 10vw;
+  }
+
+  .content-task {
+    margin-top: 10vw;
+  }
+
+  .completed {
+    margin-top: 10vw;
+  }
+
+  .button-action {
+    margin-left: -2vw;
+  }
+
+  .btn-delete {
+    margin-left: 2vw;
+  }
+
+  .del-done {
+    margin-left: 12.3vw;
+  }
 }
