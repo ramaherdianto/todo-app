@@ -2,139 +2,141 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [form, setForm] = useState({
-    todo: "",
+  const [taskList, setTaskList] = useState([]);
+  const [formTask, setForm] = useState({
+    task: "",
     status: false,
   });
 
   const resetInput = () => {
     setForm({
-      todo: "",
+      task: "",
       status: false,
     });
   };
 
-  const handleChange = (e) => {
+  const eventChange = (e) => {
     console.log(e.target.value);
     setForm({
-      ...form,
-      todo: e.target.value,
+      ...formTask,
+      task: e.target.value,
       status: false,
     });
   };
 
-  const handleSubmit = (e) => {
+  const eventSubmit = (e) => {
     e.preventDefault();
-    if (form.index || form.index === 0) {
-      //Update
-      const newTodo = todoList.map((e, i) => {
-        if (i === form.index) {
-          return form;
+    if (formTask.index || formTask.index === 0) {
+      //Update Task
+      const newTask = taskList.map((e, i) => {
+        if (i === formTask.index) {
+          return formTask;
         } else {
           return e;
         }
       });
-      setTodoList(newTodo);
+      setTaskList(newTask);
     } else {
-      //insert
-      setTodoList([...todoList, form]);
+      //Input Task
+      setTaskList([...taskList, formTask]);
     }
     resetInput();
   };
 
-  const handleCheck = (index) => {
-    const newTodo = todoList.map((e, i) => {
+  // Checking
+  const eventCheck = (index) => {
+    const newTask = taskList.map((e, i) => {
       if (i === index) {
         return {
-          todo: e.todo,
+          task: e.task,
           status: true,
         };
       } else {
         return e;
       }
     });
-    setTodoList(newTodo);
+    setTaskList(newTask);
   };
 
-  const handleDelete = (index) => {
-    const newTodo = todoList.filter((e, i) => {
+  // Delete Task
+  const eventDelete = (index) => {
+    const newTask = taskList.filter((e, i) => {
       if (i != index) {
         return e;
       }
     });
-    setTodoList(newTodo);
+    setTaskList(newTask);
   };
 
-  const handleEdit = (index) => {
-    const detailTodo = {
+  // Edit Task
+  const eventEdit = (index) => {
+    const detailTask = {
       index,
-      ...todoList[index],
+      ...taskList[index],
     };
-    setForm(detailTodo);
-  };
-
-  const nullDataMessage = () => {
-    if (!todoList.length) {
-      return <p>Data Tidak Ada</p>;
-    }
+    setForm(detailTask);
   };
 
   return (
     <div>
-      <div className="jumbotron">
-        <h1>Todo List App</h1>
-        <form method="post" onSubmit={handleSubmit} className="form">
-          <input type="text" name="todo" value={form.todo} onChange={handleChange} placeholder="Todo" />
-          <button type="submit" className="btn-submit">
-            Submit
-          </button>
+      <div className="card-task">
+        {/* Form Input Task */}
+        <form method="post" onSubmit={eventSubmit}>
+          <h1>TodoList App</h1>
+          <div className="input-box">
+            <input type="text" className="input" name="task" value={formTask.task} onChange={eventChange} placeholder="Task..." />
+            <button className="button" type="submit">
+              Add Task
+            </button>
+          </div>
         </form>
-      </div>
-      <div className="content">
-        <h3>Todo</h3>
-        {nullDataMessage()}
-        {todoList.map((e, i) => {
-          if (e.status === false) {
-            return (
-              <div key={i} className="card">
-                <div className="action">
-                  <input type="checkbox" checked={e.status ? true : false} onChange={() => handleCheck(i)} />
+
+        {/* Result */}
+        <div className="content-task">
+          <h3>Tasks Today</h3>
+          {taskList.map((e, i) => {
+            if (e.status === false) {
+              return (
+                <div key={i} className="card">
+                  <div className="check-action">
+                    <input type="checkbox" checked={e.status ? true : false} onChange={() => eventCheck(i)} />
+                  </div>
+                  <div className="task">{e.task}</div>
+                  <div className="button-action">
+                    <button onClick={() => eventEdit(i)} className="btn-edit">
+                      Edit
+                    </button>
+                    <button onClick={() => eventDelete(i)} className="btn-delete">
+                      Delete
+                    </button>
+                  </div>
                 </div>
-                <div className="text">{e.todo}</div>
-                <div className="button-action">
-                  <button onClick={() => handleEdit(i)} className="btn-edit">
-                    Edit
-                  </button>
-                  <button onClick={() => handleDelete(i)} className="btn-delete">
-                    Delete
-                  </button>
+              );
+            }
+          })}
+        </div>
+
+        {/* Tasks Completed */}
+        <div className="content-task completed">
+          <h3>Tasks Completed</h3>
+          {taskList.map((e, i) => {
+            if (e.status === true) {
+              return (
+                <div key={i} className="card">
+                  <div className="check-action">
+                    <input type="checkbox" checked={e.status ? true : false} onChange={() => eventCheck(i)} />
+                  </div>
+                  <div className="task">{e.task}</div>
+                  <div className="button-action">
+                    <button onClick={() => eventDelete(i)} className="btn-delete del-done">
+                      Delete
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          }
-        })}
-      </div>
-      <div className="content">
-        <h3>Completed</h3>
-        {nullDataMessage()}
-        {todoList.map((e, i) => {
-          if (e.status === true) {
-            return (
-              <div key={i} className="card">
-                <div className="action">
-                  <input type="checkbox" checked={e.status ? true : false} onChange={() => handleCheck(i)} />
-                </div>
-                <div className="text">{e.todo}</div>
-                <div className="button-action">
-                  <button onClick={() => handleDelete(i)} className="btn-delete">
-                    Delete
-                  </button>
-                </div>
-              </div>
-            );
-          }
-        })}
+              );
+            }
+          })}
+        </div>
       </div>
     </div>
   );
